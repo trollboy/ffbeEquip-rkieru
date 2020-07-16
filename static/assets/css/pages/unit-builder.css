@@ -1,0 +1,168 @@
+/* --------------------------------------------------------------- *\
+   ffbe.page.builder.css
+
+   CSS for 'Builder' tool
+
+\* --------------------------------------------------------------- */
+
+.build_in_progress {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+        rgba(var(--nav_bg_1),0),
+        rgba(var(--nav_bg_1),0.1) 25%,
+        rgba(var(--nav_bg_1),0.3) 50%,
+        rgba(var(--nav_bg_3),0.6) 75%,
+        rgba(var(--nav_bg_3),0.8) 100% );
+    z-index: 99;
+    top: 0;
+    left: 0;
+}
+
+.build_in_progress.hidden {
+    display: none;
+}
+
+.build_in_progress .build_animation {
+    width: 100%;
+    min-height: 300px;
+    background: url("/assets/media/backgrounds/build_bg.png") bottom 90px center no-repeat;
+}
+
+.build_in_progress .ffbe_content--box.build_actions {
+    width: auto;
+    display: flex;
+    padding: 1rem 1.5rem;
+    flex-direction: column;
+    margin: -10px auto 0 auto;
+    max-width: 25%;
+    min-width: 350px;
+    color: rgb(var(--nav_link_icon));
+    font-size: 0.875rem;
+    border-radius: 0.75rem;
+}
+
+.build_in_progress .progress {
+    border-radius: 0.2rem;
+}
+
+.build_animation--wrapper {
+    margin-left: -50px;
+}
+
+.build_animation--wrapper .animation_rain {
+    margin-left: -125px;
+}
+
+
+
+
+#trig_unitConfigCollapse .hidden + .btn {
+  border-top-left-radius: 0.25rem;
+  border-bottom-left-radius: 0.25rem;
+}
+
+
+@media (min-width: 768px) {
+	.collapse.collapse-mobile[data-state="shown"] {
+		display: block;
+		height: auto;
+	}
+}
+
+#unitTabs .nav-item {
+  position: relative;
+}
+
+#unitTabs .closeTab {
+  position: absolute;
+  right: -5px;
+  top: -5px;
+  border: 0;
+  padding: 2px 4px;
+  background: linear-gradient(rgb(var(--btn_danger_1)) 0%, rgb(var(--btn_danger_2)) 50%, rgb(var(--btn_danger_3)) 100%);
+  color: var(--white);
+  border-radius: 999px;
+  font-size: 0.625rem;
+}
+
+
+
+.unitTab-img {
+    max-height: 30px;
+}
+
+.unitRarity-star {
+  display: inline-flex;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  background: url('/assets/media/icons/star-rainbow.svg') center center no-repeat;
+  background-size: contain;
+  filter: drop-shadow( 1px 1px 1px rgba(0, 0, 0, .2));
+}
+
+.unitRarity-star.inactive {
+  background: url('/assets/media/icons/star-gray.svg') center center no-repeat;
+  opacity: 0.5;
+}
+
+#fixItemModal .statChoice.dropdown-menu {
+    max-width: 150px;
+}
+
+#fixItemModal .statChoice.dropdown-menu .dropdown-item {
+    display: inline-flex;
+    flex-wrap: wrap;
+    width: 50px;
+    max-width: 50px;
+    clear: none;
+    margin: 0;
+    padding: 0.25rem 0.5rem;
+}
+
+#fixItemModal .type img {
+    max-height: 35px;
+}
+
+.selectSkillItem .selectTag {
+    margin-left: auto;
+    background: grey;
+    border-radius: 3px;
+    color: #fff;
+    font-size: .65em;
+    font-weight: 700;
+    opacity: .85;
+    margin: 5px 0;
+}
+
+.selectSkillItem .badge.badge-skill {
+    color: var(--white);
+}
+
+.selectSkillItem .selectIcon {
+    height: 24px;
+    width: 24px;
+}
+
+.select2-results__option[aria-disabled=true] {
+    opacity: 0.3;
+}
+
+.selectSkillItem .skillTag        { background: #6a991d; }
+.selectSkillItem .magicTag        { background: #008b8b;}
+.selectSkillItem .multicastTag    { background: #00f;}
+.selectSkillItem .notSupportedTag { background: grey;}
+.selectSkillItem .lbTag           { background: #723232;}
+.selectSkillItem .damageTag       { background: #b38900;}
+.selectSkillItem .statTag         { background: #2d89a0;}
+.selectSkillItem .upgradedSkillIcon {
+    color: #ff8c00;
+    font-weight: 700;
+    margin-top: -1px;
+    margin-left: 2px;
+}
