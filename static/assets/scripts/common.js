@@ -200,7 +200,7 @@ function getNameColumnHtml(item) {
     var html = '<div class="getNameColumnHtml--Name">';
 
     if (item.rarity) {
-      html += '<span class="rarity">' + item.rarity + '★</span> ';
+      html += '<span class="rarity itemRarity">' + item.rarity + '★</span> ';
     }
 
     if (item.placeHolder) {
@@ -213,7 +213,7 @@ function getNameColumnHtml(item) {
         html += toLink(item.name);
     }
     if (item.level) {
-        html += '<span class="rarity"> level ' + item.level + '</span> ';
+        html += '<span class="rarity itemLevel">level ' + item.level + '</span> ';
     }
     if (item.buildLink) {
         html += '<a href="' + item.buildLink + '" target="blank" class="buildLink"><span class="fa fa-external-link-alt wikiLink"></span></a>';
@@ -658,12 +658,12 @@ var getStatDetail = function(item) {
 };
 
 function getEnhancements(item) {
-    var html = '<div class="enhancements">';
+    var html = '<div class="getEnhancements">';
     var first = true;
     for (var i = 0, len = item.enhancements.length; i < len; i++) {
         if (first) {
             first = false;
-            html += '<img src="/assets/game/icons/dwarf.png"/>'
+            html += '<i class="icon icon-sm tab-enhance"></i><div class="stats">'
         } else {
             html += ", ";
         }
@@ -678,7 +678,7 @@ function getEnhancements(item) {
             html += itemEnhancementLabels[enhancement];
         }
     }
-    html += '</div>';
+    html += '</div></div>';
     return html;
 }
 
@@ -928,7 +928,11 @@ function addIconChoicesTo(targetId, valueList, type="checkbox", iconType = "", t
 
 // Add one text choice to a filter
 function addTextChoiceTo(target, name, type, value, label) {
-	target.append('<label class="btn btn-primary"><input type="' + type +'" name="' + name + '" value="'+value+'" autocomplete="off">'+label+'</label>');
+	if (name == 'simpleConditionVarious') {
+		target.append('<div class="custom-control custom-switch"><input type="' + type +'" class="custom-control-input" name="' + name + '" value="'+value+'" autocomplete="off" id="' + name + '_' + value + '"><label class="custom-control-label" for="' + name + '_' + value + '">'+label+'</label></div>');
+	} else {
+		target.append('<label class="btn btn-primary"><input type="' + type +'" name="' + name + '" value="'+value+'" autocomplete="off">'+label+'</label>');
+	}
 }
 
 // Add one image choice to a filter
@@ -2502,11 +2506,34 @@ $(function() {
       html: true
     });
 
+    // Initialize Bootstrap Popover in a way that allows DOM-inserted items to trigger.
     $('body').popover({
       selector: '[data-toggle="popover"]',
       container: 'body',
       html: true
     });
+
+    // Allow [data-toggle="modal"] to open external HTML assets.
+		$('body').on('click', '[data-toggle="modal"]', function(event) {
+			var m_target = $(this).data("target"), // Modal snippet to target
+	    		m_path   = $(this).data("path"),   // URL to open
+	    		m_size   = $(this).data("size");   // Size to apply (eg. modal-xl)
+
+			if (typeof $(this).data('path') !== 'undefined') {
+				// Do Nothing
+			} else {
+				var m_path = $(this).attr('href');
+			}
+
+			if ( $(this).prop('disabled', false) ) {
+				$(m_target).modal('dispose');
+				$(".modal-backdrop").remove();
+
+				$(m_target + ' .modal-dialog').removeClass('modal-lg modal-sm modal-xl').addClass('modal-' + m_size);
+				$(m_target + ' .modal-dialog' + ' .modal-content').load(m_path); 
+			}
+		});
+
 
   }, 'json').fail(function(jqXHR, textStatus, errorThrown ) {
     Modal.showErrorGet(this.url, errorThrown);
