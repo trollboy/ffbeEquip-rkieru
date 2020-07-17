@@ -204,17 +204,17 @@ var modifyFilterSummary = function() {
     var html = "";
     if (types.length != 0) {
         for (var index in types) {
-			html += '<i src="img img-equipment-' + types[index] + '"></i>';
+			html += '<i src="icon icon-sm equipment-' + types[index] + '"></i>';
         }
     }
     if (elements.length != 0) {
         for (var index in elements) {
-			html += '<i class="img img-element-' + elements[index] + '"></i>';
+			html += '<i class="icon icon-sm element-' + elements[index] + '"></i>';
         }
     }
     if (ailments.length != 0) {
         for (var index in ailments) {
-			html += '<i class="img img-ailment-' + ailments[index] + '"></i>';
+			html += '<i class="icon icon-sm ailment-' + ailments[index] + '"></i>';
         }
     }
     if (physicalKillers.length != 0 || magicalKillers.length != 0) {
@@ -245,28 +245,38 @@ function getItemsHtmls(items) {
 }
 
 function getItemHtml(item) {
-    let html = '<div class="tr';
-    if (item.temp) {
-        html += ' userInputed';
-    }
-    html += '">';
-    html += displayItemLine(item);
-    if (itemInventory) {
-        html+= '<div class="td inventory ' + escapeName(item.id) + ' ' ;
-        if (!itemInventory[item.id]) {
-            html+= "notPossessed";
-        }
-        html += '">';
-        html += '<span class="number badge badge-success">';
-        if (itemInventory[item.id]) {
-            html += itemInventory[item.id];
-        }
-        html += '</span>';
+	let html = '',
+			htmlClass = '';
 
-        html += '</div>';
-    }
-    html += "</div>";
-    return html;
+	if (item.temp) {
+		htmlClass = ' userInputed';
+	}
+
+	if (itemInventory) {
+		if (!itemInventory[item.id]) {
+			htmlClass += " notPossessed";
+		}
+	}
+
+	html += '<div class="col-6 col-md-4 mb-2 bookItem ' + htmlClass + '">';
+	html += '  <div class="ffbe_content--well p-2 rounded border ">';
+	html += '    <div class="form-row align-items-center">';
+	html += '      <div class="col-auto">' + getImageHtml(item) + '</div>';
+	html += '      <div class="col align-self-center">' + getNameColumnHtml(item) + '</div>';
+
+	if (itemInventory) {
+		if (itemInventory[item.id]) {
+			html += '  <div class="col-auto inventory ' + escapeName(item.id) + '" data-item="' + escapeName(item.id) + '">';
+			html += '    <span class="number badge badge-secondary">' + itemInventory[item.id] + '</span>';
+	    html += '  </div>';
+		}
+	}
+
+	html += "    </div>";
+	html += "  </div>";
+	html += "</div>";
+
+	return html;
 }
 
 function afterDisplay() {
@@ -306,14 +316,14 @@ var displayUnitRarity = function(unit) {
     if (unit) {
         var rarity = unit.max_rarity;
 
-        rarityWrapper.show();
+        rarityWrapper.removeClass('hidden');
         rarityWrapper.empty();
 
         for (var i = 0; i < rarity; i++) {
-            rarityWrapper.append('<i class="rarity-star"></i>');
+            rarityWrapper.append('<span class="fa fa-fw fa-star"></span>');
         }
     } else {
-        rarityWrapper.hide();
+        rarityWrapper.addClass('hidden');
     }
 };
 
@@ -430,14 +440,14 @@ function populateUnitSelect() {
                 $(baseStats).each(function (index, stat) {
                     $("#baseStat_" + stat).val(selectedUnitData.stats.maxStats[stat] + selectedUnitData.stats.pots[stat]);
                 });
-                $(".unit-image").html("<img src=\"/assets/media/units/unit_ills_" + selectedUnitData.id + ".png\"/>");
+                $(".unit-image").html('<img src="/assets/game/units/unit_ills_' + selectedUnitData.id + '.png" />').removeClass('hidden');
                 unselectAll("types", false);
             } else {
                 selectedUnitId = 0;
                 $(baseStats).each(function (index, stat) {
                     $("#baseStat_" + stat).val("");
 		      	});
-                $(".unit-image").html("");
+                $(".unit-image").html("").addClass('hidden');
             }
             displayUnitRarity(selectedUnitData);
         });
@@ -445,7 +455,7 @@ function populateUnitSelect() {
     });
     $('#unitsSelect').select2({
         placeholder: 'Select a unit...',
-        theme: 'bootstrap'
+        theme: 'bootstrap4'
     });
 }
 

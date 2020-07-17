@@ -942,8 +942,8 @@ function addIconChoiceTo(target, name, value, type="checkbox", iconType = "", to
     if (tooltip) tooltip = 'data-toggle="tooltip" title="'+tooltip+'"';
     else tooltip = ' title="'+value+'"';
 
-    target.append('<label class="btn btn-primary iconChoice" '+tooltip+'>'+
-                  '<input type="'+type+'" name="'+name+'" value="'+value+'" autocomplete="off" />'+
+    target.append('<label class="btn btn-primary iconChoice" for="'+name+'_'+value+'" '+tooltip+'>'+
+                  '<input type="'+type+'" name="'+name+'" value="'+value+'" autocomplete="off" id="'+name+'_'+value+'" />'+
                   '<i class="mx-auto icon icon-sm '+iconType+'-'+icon+'"></i>'+
                   '</label>');
 }

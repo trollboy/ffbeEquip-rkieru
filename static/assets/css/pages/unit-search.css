@@ -20,13 +20,13 @@
 }
 
 .unit-skills .skillGroup {
-    font-size: 0.875rem;
-    color: rgb(var(--nav_link_icon));
-    border: 1px solid rgba(var(--nav_bg_3), 0.85);
+	font-size: 0.875rem;
+	color: rgb(var(--nav_link_icon));
+	border: 1px solid rgba(var(--nav_bg_3), 0.85);
 	background:	linear-gradient(rgba(var(--nav_bg_2), 0.7), rgba(var(--nav_bg_2), 0.9)), rgb(var(--btn_primary_3));
-    border-radius: 0.25rem;
-    padding: 0.75rem;
-    margin-bottom: 0.25rem;
+	border-radius: 0.25rem;
+	padding: 0.75rem;
+	margin-bottom: 0.25rem;
  	box-shadow:
 		0 1px 2px   rgba(50,50,50, 0.02),
 		0 4px 8px   rgba(50,50,50, 0.08),
@@ -34,40 +34,40 @@
 }
 
 .unit-skills .skillIcon {
-    max-height: 50px;
-    flex: 0;
+	max-height: 50px;
+	flex: 0;
 }
 
 .unit-skills .nameAndEffects {
-    flex: 1;
+	flex: 1;
 }
 
 .unit-skills .nameAndEffects .name {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 }
 
 .unit-skills .nameAndEffects .effect {
-    font-size: 0.75rem;
-    font-style: italic;
+	font-size: 0.75rem;
+	font-style: italic;
 }
 
 .unit-skills .nameAndEffects .effect  .icon {
-    display: inline-flex;
-    align-self: center;
-    vertical-align: middle;
+	display: inline-flex;
+	align-self: center;
+	vertical-align: middle;
 }
 
 .unit-skills .nameAndEffects .mpCost,
 .unit-skills .nameAndEffects .mpCostLabel {
-    font-weight: bold;
+	font-weight: bold;
 }
 
 .unit-skills .skillGroup .skill {
-    display: flex;
-    padding: 0.5rem 0;
-    line-height: 1.25;
+	display: flex;
+	padding: 0.5rem 0;
+	line-height: 1.25;
 }
 
 .unit-skills .skillGroup .subSkill {
@@ -80,16 +80,16 @@
 }
 
 .unit-skills .skillGroup .subSkill .skill {
-    display: flex;
-    border: none;
-    padding: 0;
-    background: none;
+	display: flex;
+	border: none;
+	padding: 0;
+	background: none;
 }
 
 .unitSearchResults .getKillerHtml,
 .unitSearchResults .elementalResistance,
 .unitSearchResults .ailmentResistance {
-    font-size: 0.75rem;
+	font-size: 0.75rem;
   text-align: center;
 }
 

@@ -47,55 +47,75 @@ function filterUnknowItems(data) {
 
 
 function displayItems(items) {
-    var html = "";
-    for (var index in items) {
-        var item = items[index];
-        if (item) {
-            html += '<tr class="' + item.id + (item.corrected ? " userInputed" : "") + '">';
-            html += '  <td class="select"><span class="fa fa-edit clickable" onclick="modifyItem(\'' + item.id + '\')"/></td>';
-            html += '  <td colspan="5">' + displayItemLine(item) + '</td>';
-            html += '  <td>' + (item.maxNumber ? item.maxNumber : "N/A") + "</td>";
-            html += "</tr>";
-        }
-    }
+	var html = "";
 
-    $(".itemList #results .tbody").html(html);
+	for (var index in items) {
+		var item = items[index];
+
+		if (item) {
+			html += '<div class="border rounded p-2 mb-2 contributeItem">';
+			html += '  <div class="form-row ' + item.id + (item.corrected ? " userInputed" : "") + '">';
+			html += '    <div class="col-auto"><button class="btn btn-sm btn-ghost h-100" onclick="modifyItem(\'' + item.id + '\')"><span class="fa fa-edit fa-fw"></span></button></div>';
+			html += '    <div class="col-auto">' + getImageHtml(item) + '</div>';
+			html += '    <div class="col align-self-center">' + getNameColumnHtml(item) + '</div>';
+			html += '    <div class="col-auto align-self-center">' + (item.maxNumber ? item.maxNumber : "") + "</div>";
+			html += "  </div>";
+			html += "</div>";
+		}
+	}
+
+	$(".itemList #results").html(html);
 }
 
 function displayModifiedItems() {
-    for (var id in modifiedItems) {
-        var maxNumber = $("#modifiedItems .tr." + id + " input.maxNumber").val();
-        if (maxNumber && !isNaN(parseInt(maxNumber))) {
-            modifiedItems[id].maxNumber = parseInt(maxNumber);
-        } else {
-            delete modifiedItems[id].maxNumber;
-        }
-    }
-    if (Object.keys(modifiedItems).length == 0) {
-        $("#modifiedItems").addClass("hidden");
-    } else {
-        $("#modifiedItems").removeClass("hidden");
-        var html = "";
-        for (var itemId in modifiedItems) {
-            var modifiedItem = modifiedItems[itemId];
-            var item = dataById[itemId];
-            if (item) {
-                html += '<div class="tr ' + item.id + '">';
-                html += getImageHtml(item);
-                html += getNameColumnHtml(item);
-                html += '<div class="td access"><div><span class="glyphicon glyphicon-edit clickable" onclick="openAddAccess(\'' + item.id + '\')"></span><div class="accessList">';
-                for (var accesIndex = 0, accessLen = modifiedItem.access.length; accesIndex < accessLen; accesIndex++) {
-                    html += '<div>' + modifiedItem.access[accesIndex] + '</div>';
-                }
-                html += "</div></div></div>";
-                html += '<div class="td"><input class="maxNumber" type="number" onkeypress="return isNumber(event)" value="' + (modifiedItem.maxNumber ? modifiedItem.maxNumber : "") + '"/></div>';
-                html += '<div class="td select"><span class="glyphicon glyphicon-remove clickable" onclick="cancelModification(\'' + item.id + '\')"/></div>';
-                html += "</div>";
-            }
-        }
+	for (var id in modifiedItems) {
+		var maxNumber = $("#modifiedItems .tr." + id + " input.maxNumber").val();
+		if (maxNumber && !isNaN(parseInt(maxNumber))) {
+			modifiedItems[id].maxNumber = parseInt(maxNumber);
+		} else {
+			delete modifiedItems[id].maxNumber;
+		}
+	}
 
-        $("#modifiedItems .tbody").html(html);
-    }
+	if (Object.keys(modifiedItems).length == 0) {
+		$("#modifiedItems").addClass("hidden");
+	} else {
+		$("#modifiedItems").removeClass("hidden");
+			var html = "";
+      
+			for (var itemId in modifiedItems) {
+        var modifiedItem = modifiedItems[itemId];
+        var item = dataById[itemId];
+
+      	if (item) {
+      		html += '<div class="border rounded p-2 mb-2 contributeItem">';
+      		html += '  <div class="form-row align-items-center ' + item.id + '">';
+      		html += '    <div class="col-auto">' + getImageHtml(item) + '</div>';
+      		html += '    <div class="col">';
+      		html +=        getNameColumnHtml(item);
+      		html += '      <div class="accessList">';
+
+      		for (var accesIndex = 0, accessLen = modifiedItem.access.length; accesIndex < accessLen; accesIndex++) {
+      			html += '<div>' + modifiedItem.access[accesIndex] + '</div>';
+      		}
+
+      		html += '      </div>';
+      		html += '    </div>';
+      		html += '    <div class="col-2 align-self-center">';
+      		html += '      <div class="d-flex align-items-center mb-1">';
+      		html += '        <button class="btn btn-sm btn-ghost w-100 mr-1" onclick="openAddAccess(\'' + item.id + '\')"><span class="fa fa-plus fa-fw"></span></button>';
+      		html += '        <button class="btn btn-sm btn-ghost w-100" onclick="cancelModification(\'' + item.id + '\')"><span class="fa fa-minus fa-fw"></span></button>';
+      		html += '      </div>';
+      		html += '      <input class="form-control maxNumber" type="number" onkeypress="return isNumber(event)" min="0" step="1" value="' + (modifiedItem.maxNumber ? modifiedItem.maxNumber : "") + '"/>';
+      		html += '    </div>';
+      		html += "  </div>";
+      		html += "</div>";
+
+      	}
+      }
+
+    $("#modifiedItems #results-edit").html(html);
+	}
 }
 
 function modifyItem(itemId) {
