@@ -5,6 +5,44 @@
 
 \* --------------------------------------------------------------- */
 
+/* Weapon & Armor Display ---------------------------------------- */
+
+.unitEquipable .weapons,
+.unitEquipable .armors {
+	cursor: pointer;
+}
+
+.unitEquipable .notEquipable,
+.unitEquipable .notEquipable {
+	opacity: 0.3;
+}
+
+.unitEquipable .icon:not(.boost) .boostArrow,
+.unitEquipable .icon:not(.banned) .banArrow {
+	display: none;
+}
+
+.unitEquipable .boost {
+	position: relative;
+}
+
+.unitEquipable .boostArrow {
+	position: absolute;
+	width: 10px;
+	height: 10px;
+	top: -1px;
+	right: -1px;
+	color: rgb(var(--btn_success_3));
+  filter: drop-shadow(0 0 3px rgba(0, 0, 0, .9));
+}
+
+.unitEquipable .banArrow {
+	width: 15px;
+	height: 15px;
+	margin: auto;
+	color: rgb(var(--btn_danger_3));
+  filter: drop-shadow(0 0 3px rgba(0, 0, 0, .9));
+}
 
 /* Equipment Slot Display ---------------------------------------- */
 
@@ -310,8 +348,6 @@
   border-radius: 999px;
   font-size: 0.625rem;
 }
-
-
 
 #unitTabs img {
 	max-height: 30px;

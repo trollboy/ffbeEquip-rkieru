@@ -261,7 +261,7 @@ function getItemHtml(item) {
 	html += '<div class="col-6 col-md-4 mb-2 bookItem ' + htmlClass + '">';
 	html += '  <div class="ffbe_content--well p-2 rounded border ">';
 	html += '    <div class="form-row align-items-center">';
-	html += '      <div class="col-auto">' + getImageHtml(item) + '</div>';
+	html += '      <div class="col-auto">' + getImageHtml(item, "", false) + '</div>';
 	html += '      <div class="col align-self-center">' + getNameColumnHtml(item) + '</div>';
 
 	if (itemInventory) {

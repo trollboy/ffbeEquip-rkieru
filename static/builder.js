@@ -1678,7 +1678,7 @@ function updateUnitStats() {
         });
 
         builds[currentUnitIndex].unit.equip.forEach(equip => {
-            let equipImg = $(".unitEquipable i.img-equipment-" + equip);
+            let equipImg = $(".unitEquipable .equipment-" + equip);
             equipImg.removeClass("notEquipable");
             if (equipmentBoost.includes(equip)) {
                 equipImg.addClass("boost");
@@ -4846,18 +4846,18 @@ function populateUnitEquip() {
             //var target = $(".unitEquipable.weapons2");
             //target.html("");
         }
-        target.append('<i class="icon icon-sm equipment-'+weaponList[key]+' notEquipable" onclick="toogleEquipableType(\'' + weaponList[key] + '\');"><i class="fas fa-angle-double-up boostArrow"></i></i></i>');
+        target.append('<i class="icon icon-sm equipment-'+weaponList[key]+' notEquipable" onclick="toogleEquipableType(\'' + weaponList[key] + '\');"><i class="fas fa-angle-double-up boostArrow"></i><i class="fas fa-ban banArrow"></i></i>');
 	}
     var target = $(".unitEquipable .armors");
     target.html("");
     for (var key in shieldList) {
-        target.append('<i class="icon icon-sm equipment-'+shieldList[key]+' notEquipable" onclick="toogleEquipableType(\'' + shieldList[key] + '\');"><i class="fas fa-angle-double-up boostArrow"></i></i>');
+        target.append('<i class="icon icon-sm equipment-'+shieldList[key]+' notEquipable" onclick="toogleEquipableType(\'' + shieldList[key] + '\');"><i class="fas fa-angle-double-up boostArrow"></i><i class="fas fa-ban banArrow"></i></i>');
 	}
     for (var key in headList) {
-        target.append('<i class="icon icon-sm equipment-'+headList[key]+' notEquipable" onclick="toogleEquipableType(\'' + headList[key] + '\');"><i class="fas fa-angle-double-up boostArrow"></i></i>');
+        target.append('<i class="icon icon-sm equipment-'+headList[key]+' notEquipable" onclick="toogleEquipableType(\'' + headList[key] + '\');"><i class="fas fa-angle-double-up boostArrow"></i><i class="fas fa-ban banArrow"></i></i>');
 	}
     for (var key in bodyList) {
-        target.append('<i class="icon icon-sm equipment-'+bodyList[key]+' notEquipable" onclick="toogleEquipableType(\'' + bodyList[key] + '\');"><i class="fas fa-angle-double-up boostArrow"></i></i>');
+        target.append('<i class="icon icon-sm equipment-'+bodyList[key]+' notEquipable" onclick="toogleEquipableType(\'' + bodyList[key] + '\');"><i class="fas fa-angle-double-up boostArrow"></i><i class="fas fa-ban banArrow"></i></i>');
 	}
     if (builds[currentUnitIndex]) {
         builds[currentUnitIndex].bannedEquipableTypes.forEach(type => $('.unitEquipable .equipment-' + type).addClass("banned"));
@@ -4866,7 +4866,7 @@ function populateUnitEquip() {
 
 function toogleEquipableType(equipableType) {
     builds[currentUnitIndex].toogleEquipableType(equipableType);
-    $('.unitEquipable .img-equipment-' + equipableType).toggleClass("banned");
+    $('.unitEquipable .equipment-' + equipableType).toggleClass("banned");
 }
 
 function populateItemType(equip) {
